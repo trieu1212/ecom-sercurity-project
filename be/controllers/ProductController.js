@@ -8,15 +8,15 @@ const ProductController = {
       let products;
 
       if (qNew) {
-        products = await Product.find().sort({ createdAt: -1 }).limit(1);
+        products = await productModel.find().sort({ createdAt: -1 }).limit(1);
       } else if (qCategory) {
-        products = await Product.find({
+        products = await productModel.find({
           categories: {
             $in: [qCategory],
           },
         });
       } else {
-        products = await Product.find();
+        products = await productModel.find();
       }
 
       res.status(200).json(products);
@@ -24,6 +24,15 @@ const ProductController = {
       res.status(500).json(err);
     }
   },
+  createProduct:async(req,res)=>{
+    const newProduct = new productModel(req.body);
+    try {
+      const product = await newProduct.save();
+      res.status(201).json(product);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 };
 
 module.exports = ProductController;

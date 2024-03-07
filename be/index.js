@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 const AuthRoute = require('./routes/AuthRoute')
 const UserRoute = require('./routes/UserRoute')
 const ProductRoute = require('./routes/ProductRoute')
+const CartRoute = require('./routes/CartRoute')
 
 
 //config server
@@ -31,3 +32,4 @@ mongoose.connect(process.env.MONGODB_URI).then((res)=>{
 app.use('/api/auth',AuthRoute)
 app.use('/api/user',UserRoute)
 app.use('/api/product',ProductRoute)
+app.use('/api/cart',CartRoute)
